@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+wandb/
+runs/
+results/
+*.pt
+*.pth
+*.bin
+# data/  — not ignored, given datasets are tracked in git
+.env
+.DS_Store
