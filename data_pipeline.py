@@ -27,6 +27,9 @@ def set_seed(seed=SEED):
 
 def clean_text(text):
     """Light text cleaning for transformers."""
+    if not text:
+        return ""
+    text = str(text)
     text = re.sub(r"<[^>]+>", " ", text)        # remove HTML tags
     text = re.sub(r"http\S+|www\S+", " ", text)  # remove URLs
     text = re.sub(r"\S+@\S+", " ", text)         # remove emails
