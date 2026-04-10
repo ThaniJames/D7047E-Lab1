@@ -11,7 +11,7 @@ SPLIT_RATIOS = (0.8, 0.1, 0.1)  # train, val, test
 NUM_LABELS = 2
 LABEL_MAP = {0: "negative", 1: "positive"}
 
-# Hugging Face large dataset (~1GB, 3.6M rows total)
+# Hugging Face large dataset (~1.78GB, 3.6M rows total)
 HF_DATASET_NAME = "amazon_polarity"
 
 # Transformer defaults
