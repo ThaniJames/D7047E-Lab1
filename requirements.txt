@@ -7,3 +7,5 @@ matplotlib
 numpy
 pandas
 accelerate
+evaluate
+seaborn
