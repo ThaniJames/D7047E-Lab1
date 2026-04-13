@@ -38,7 +38,17 @@ def clean_text(text):
 
 
 
-# Layer 1: Load Amazon Polarity from Hugging Face
+# Layer 1: Load datasets
+def load_given_dataset(filepath):
+    """Load the given 1K or 25K dataset (tab-separated .txt)."""
+    import pandas as pd
+    df = pd.read_csv(filepath, delimiter="\t", header=None,
+                     names=["Sentence", "Class"])
+    texts = [clean_text(str(t)) for t in df["Sentence"].tolist()]
+    labels = df["Class"].astype(int).tolist()
+    return texts, labels
+
+
 def load_amazon_polarity(subset_size=None, seed=SEED):
     """Load Amazon Polarity dataset from Hugging Face"""
    
@@ -87,9 +97,12 @@ def split_data(texts, labels, split_ratios=SPLIT_RATIOS, seed=SEED):
     }
 
 
-def load_and_split(subset_size=None, seed=SEED, split_ratios=SPLIT_RATIOS):
-    """Main entry point: load Amazon Polarity and split it."""
-    texts, labels = load_amazon_polarity(subset_size=subset_size, seed=seed)
+def load_and_split(subset_size=None, filepath=None, seed=SEED, split_ratios=SPLIT_RATIOS):
+    """Main entry point: load dataset and split it"""
+    if filepath is not None:
+        texts, labels = load_given_dataset(filepath)
+    else:
+        texts, labels = load_amazon_polarity(subset_size=subset_size, seed=seed)
     return split_data(texts, labels, split_ratios=split_ratios, seed=seed)
 
 
